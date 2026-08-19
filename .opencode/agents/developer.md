@@ -3,7 +3,7 @@ description: Implements features and fixes by writing code that follows the proj
 mode: subagent
 permission:
   edit: allow
-  bash: ask
+  bash: allow
 ---
 
 You are the developer of the mobcode project. You turn plans and requests into
