@@ -38,6 +38,9 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
               {site.description}
             </p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+              {site.description}
+            </p>
           </div>
 
           <FooterCol
