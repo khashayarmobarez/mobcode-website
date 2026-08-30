@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 import { navLinks, site, telegramUrl } from "@/lib/site";
@@ -15,13 +16,13 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -34,12 +35,12 @@ export function Header() {
           >
             @{site.telegram}
           </a>
-          <a
-            href="#products"
+          <Link
+            href="/buy"
             className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
           >
             خرید اکانت
-          </a>
+          </Link>
         </div>
 
         <button
@@ -56,22 +57,22 @@ export function Header() {
         <div className="border-t border-line bg-background/95 backdrop-blur-md md:hidden">
           <nav className="flex flex-col gap-1 px-5 py-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2.5 text-sm text-muted transition-colors hover:bg-surface hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#products"
+            <Link
+              href="/buy"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-background"
             >
               خرید اکانت
-            </a>
+            </Link>
           </nav>
         </div>
       )}

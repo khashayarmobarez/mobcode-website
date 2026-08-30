@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from "@/components/icons";
-import { telegramUrl } from "@/lib/site";
 
 export function CtaBanner() {
   return (
@@ -15,12 +14,10 @@ export function CtaBanner() {
           همین حالا سفارشت را ثبت کن؛ کمتر از چند دقیقه اکانت تحویل داده می‌شود.
         </p>
         <a
-          href={telegramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/buy"
           className="group mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
         >
-          سفارش در تلگرام
+          ثبت سفارش
           <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-0.5" />
         </a>
       </div>

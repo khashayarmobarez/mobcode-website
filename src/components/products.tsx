@@ -38,7 +38,7 @@ function ProductCard({ product }: { product: Product }) {
       </ul>
 
       <a
-        href="#payment"
+        href="/buy"
         className={cn(
           "mt-8 rounded-full py-3 text-center text-sm font-semibold transition-all hover:-translate-y-0.5",
           product.featured

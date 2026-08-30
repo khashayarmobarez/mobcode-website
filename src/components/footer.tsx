@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { site, telegramUrl } from "@/lib/site";
 
@@ -16,15 +17,30 @@ function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
       <ul className="mt-5 space-y-3">
         {links.map((link) => (
           <li key={link.label}>
-            <a
-              href={link.href}
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
+            {link.external ? (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ) : link.href.startsWith("/") ? (
+              <Link
+                href={link.href}
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                href={link.href}
+                className="text-sm text-muted transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            )}
           </li>
         ))}
       </ul>
@@ -45,12 +61,12 @@ export function Footer() {
           </div>
 
           <FooterCol
-            title="محصولات"
+            title="فروشگاه"
             links={[
-              { label: "اکانت‌ها", href: "#products" },
-              { label: "نحوه خرید", href: "#how" },
-              { label: "پرداخت", href: "#payment" },
-              { label: "سوالات متداول", href: "#faq" },
+              { label: "اکانت‌ها", href: "/#products" },
+              { label: "نحوه خرید", href: "/#how" },
+              { label: "خرید", href: "/buy" },
+              { label: "سوالات متداول", href: "/#faq" },
             ]}
           />
           <FooterCol

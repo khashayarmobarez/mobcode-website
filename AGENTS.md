@@ -20,6 +20,8 @@ Router. All site copy is Persian; keep it that way unless asked.
 ## Structure
 
 - `src/app/page.tsx` — composes the landing page from section components.
+- `src/app/buy/page.tsx` — the buy page: order summary + card-to-card payment
+  panel. Payment card info appears ONLY here, never on the landing page.
 - `src/app/layout.tsx` — fonts (Vazirmatn for Persian sans/display, Unbounded
   for the latin brand wordmark, JetBrains Mono), `lang="fa" dir="rtl"`,
   metadata, global overlays.

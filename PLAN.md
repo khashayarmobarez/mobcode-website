@@ -37,13 +37,18 @@ No backend for now.
 - `features.tsx` / `how-it-works.tsx` / `faq.tsx` — Persian headings; data
   from `site.ts`.
 - `products.tsx` (replaces `pricing.tsx`) — data-driven catalog; single-product
-  layout centers the card; price via `formatToman`; CTA → `#payment`.
+  layout centers the card; price via `formatToman`; CTA → `/buy`.
 - `payment-info.tsx` (new) — card-to-card panel: grouped card number (LTR),
   bank, holder (rendered only when set), copy-to-clipboard button, note,
-  3-step checklist, Telegram CTA.
-- `cta-banner.tsx` / `footer.tsx` — Persian, Telegram/email links.
-- `page.tsx` — Hero → Marquee → Features → HowItWorks → Products →
-  PaymentInfo → Faq → CtaBanner → Footer.
+  3-step checklist, Telegram CTA. Rendered **only on `/buy`** — the card
+  never appears on the landing page.
+- `cta-banner.tsx` / `footer.tsx` — Persian, Telegram/email links; order CTAs
+  point to `/buy`.
+- `src/app/buy/page.tsx` (new route) — order summary (product + price rows)
+  + payment panel. Header/Footer shared; nav links use `/#section` hrefs via
+  `next/link` so they work from both pages.
+- `page.tsx` (landing) — Hero → Marquee → Features → HowItWorks → Products →
+  Faq → CtaBanner → Footer (no payment/card content).
 
 ## Phase 4 — Docs (done)
 

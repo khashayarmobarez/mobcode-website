@@ -18,10 +18,10 @@ export const payment = {
 };
 
 export const navLinks = [
-  { label: "محصولات", href: "#products" },
-  { label: "نحوه خرید", href: "#how" },
-  { label: "پرداخت", href: "#payment" },
-  { label: "سوالات", href: "#faq" },
+  { label: "محصولات", href: "/#products" },
+  { label: "نحوه خرید", href: "/#how" },
+  { label: "خرید", href: "/buy" },
+  { label: "سوالات", href: "/#faq" },
 ];
 
 export const marqueeItems = [
