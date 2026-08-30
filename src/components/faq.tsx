@@ -12,7 +12,7 @@ export function Faq() {
   return (
     <section id="faq" className="border-t border-line py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5">
-        <SectionHeading kicker="FAQ" title="Questions, answered." />
+        <SectionHeading kicker="سوالات متداول" title="سوالت رو جواب دادیم." />
 
         <div className="mt-12 divide-y divide-line border-y border-line">
           {faqs.map((faq, i) => {

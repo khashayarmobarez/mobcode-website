@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Unbounded, Sora, JetBrains_Mono } from "next/font/google";
+import { Unbounded, Vazirmatn, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { CursorGlow } from "@/components/cursor-glow";
 import { site } from "@/lib/site";
@@ -10,10 +10,10 @@ const unbounded = Unbounded({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const jetbrains = JetBrains_Mono({
@@ -25,7 +25,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Mobile apps, shipped monthly`,
+    default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -34,8 +34,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
-      className={`${unbounded.variable} ${sora.variable} ${jetbrains.variable}`}
+      lang="fa"
+      dir="rtl"
+      className={`${unbounded.variable} ${vazirmatn.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
         <div className="noise-overlay pointer-events-none fixed inset-0 z-50" />

@@ -1,3 +1,7 @@
-1- the theme color gotta change to look closer to mobarrez.com
-2- change the name and the first function to selling ai accounts subscriptions
-3-
+1- نهایی‌کردن نام برند (الان "passkadeh" موقتی است) — فقط `site.name` در `src/lib/site.ts` را عوض کن
+2- نوشتن نام صاحب کارت — `payment.holderName` در `src/lib/site.ts` (فعلاً خالی است و رندر نمی‌شود)
+3- گذاشتن لینک واقعی تلگرام — `site.telegram` در `src/lib/site.ts`
+4- بازبینی قیمت اکانت opencode (الان ۲٬۰۰۰٬۰۰۰ تومان) و افزودن اکانت‌های دیگر به `products`
+5- تغییر تم رنگی برای نزدیک‌شدن به mobarrez.com
+6- فاز بعدی: فروش پکیج خدمات هوش مصنوعی
+7- فاز بعد: فعال‌سازی درگاه پرداخت آنلاین در خود سایت

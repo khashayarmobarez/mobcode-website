@@ -3,7 +3,8 @@ import { Hero } from "@/components/hero";
 import { Marquee } from "@/components/marquee";
 import { Features } from "@/components/features";
 import { HowItWorks } from "@/components/how-it-works";
-import { Pricing } from "@/components/pricing";
+import { Products } from "@/components/products";
+import { PaymentInfo } from "@/components/payment-info";
 import { Faq } from "@/components/faq";
 import { CtaBanner } from "@/components/cta-banner";
 import { Footer } from "@/components/footer";
@@ -17,7 +18,8 @@ export default function Home() {
         <Marquee />
         <Features />
         <HowItWorks />
-        <Pricing />
+        <Products />
+        <PaymentInfo />
         <Faq />
         <CtaBanner />
       </main>

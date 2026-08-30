@@ -1,9 +1,10 @@
 import { Logo } from "@/components/logo";
-import { site } from "@/lib/site";
+import { site, telegramUrl } from "@/lib/site";
 
 type FooterLink = {
   label: string;
   href: string;
+  external?: boolean;
 };
 
 function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
@@ -17,6 +18,9 @@ function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
           <li key={link.label}>
             <a
               href={link.href}
+              {...(link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
@@ -41,26 +45,26 @@ export function Footer() {
           </div>
 
           <FooterCol
-            title="Product"
+            title="محصولات"
             links={[
-              { label: "Features", href: "#features" },
-              { label: "How it works", href: "#how" },
-              { label: "Pricing", href: "#pricing" },
-              { label: "FAQ", href: "#faq" },
+              { label: "اکانت‌ها", href: "#products" },
+              { label: "نحوه خرید", href: "#how" },
+              { label: "پرداخت", href: "#payment" },
+              { label: "سوالات متداول", href: "#faq" },
             ]}
           />
           <FooterCol
-            title="Company"
+            title="ارتباط"
             links={[
-              { label: "Contact", href: `mailto:${site.email}` },
-              { label: "Join waitlist", href: "#waitlist" },
+              { label: "تلگرام", href: telegramUrl, external: true },
+              { label: "ایمیل", href: `mailto:${site.email}` },
             ]}
           />
           <FooterCol
-            title="Legal"
+            title="قوانین"
             links={[
-              { label: "Privacy", href: "#" },
-              { label: "Terms", href: "#" },
+              { label: "حریم خصوصی", href: "#" },
+              { label: "شرایط استفاده", href: "#" },
             ]}
           />
         </div>

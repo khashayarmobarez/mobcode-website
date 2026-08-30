@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Logo } from "@/components/logo";
 import { CloseIcon, MenuIcon } from "@/components/icons";
-import { navLinks, site } from "@/lib/site";
+import { navLinks, site, telegramUrl } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -27,16 +27,18 @@ export function Header() {
 
         <div className="hidden items-center gap-6 md:flex">
           <a
-            href={`mailto:${site.email}`}
+            href={telegramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-xs text-muted transition-colors hover:text-foreground"
           >
-            hello@mobcode.dev
+            @{site.telegram}
           </a>
           <a
-            href="#pricing"
+            href="#products"
             className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
           >
-            Get early access
+            خرید اکانت
           </a>
         </div>
 
@@ -64,11 +66,11 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#pricing"
+              href="#products"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-background"
             >
-              Get early access
+              خرید اکانت
             </a>
           </nav>
         </div>

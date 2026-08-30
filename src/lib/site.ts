@@ -1,25 +1,36 @@
 export const site = {
-  name: "mobcode",
+  name: "passkadeh",
   url: "https://mobcode.dev",
+  tagline: "فروش اکانت‌های هوش مصنوعی",
   description:
-    "Production-grade mobile code on a subscription. A curated feature pack, reviewed and tested, in your repo every month.",
-  email: "hello@mobcode.dev",
+    "خرید اکانت معتبر opencode و دیگر سرویس‌های هوش مصنوعی با تحویل آنی. پرداخت کارت به کارت و پشتیبانی ۲۴/۷ در تلگرام.",
+  email: "hello@passkadeh.dev",
+  telegram: "passkadeh",
+};
+
+export const telegramUrl = `https://t.me/${site.telegram}`;
+
+export const payment = {
+  cardNumber: "6037997471707910",
+  bank: "بانک ملی",
+  holderName: "",
+  note: "بعد از واریز، تصویر رسید را در تلگرام بفرستید تا اکانت تحویل داده شود.",
 };
 
 export const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "محصولات", href: "#products" },
+  { label: "نحوه خرید", href: "#how" },
+  { label: "پرداخت", href: "#payment" },
+  { label: "سوالات", href: "#faq" },
 ];
 
 export const marqueeItems = [
-  "Ship monthly",
-  "Your IP, always",
-  "Native code",
-  "Reviewed & tested",
-  "App-store ready",
-  "Cancel anytime",
+  "تحویل آنی",
+  "اکانت اورجینال",
+  "ضمانت تعویض",
+  "پشتیبانی ۲۴/۷",
+  "پرداخت کارت به کارت",
+  "قیمت منصفانه",
 ];
 
 export type Feature = {
@@ -31,39 +42,39 @@ export type Feature = {
 
 export const features: Feature[] = [
   {
-    title: "A shippable update. Every single month.",
-    body: "No more nine-month roadmaps. A focused, production-ready feature pack lands in your repository on the same schedule, every month.",
+    title: "تحویل آنی",
+    body: "اکانت بلافاصله بعد از تأیید پرداخت، در تلگرام تحویل داده می‌شود.",
     icon: "rocket",
     span: "lg:col-span-2",
   },
   {
-    title: "Native code, not wrappers.",
-    body: "Swift, Kotlin and React Native written by senior mobile engineers — typed, tested and documented against your codebase.",
-    icon: "code",
-    span: "",
-  },
-  {
-    title: "Built to publish.",
-    body: "Signing, build config, asset catalogs and store-metadata support so every release is one click from submit.",
-    icon: "store",
-    span: "",
-  },
-  {
-    title: "Reviewed by engineers, not robots.",
-    body: "Every pull request is reviewed for performance, security and UX before it ever lands in your repo.",
+    title: "اکانت اورجینال",
+    body: "تمام اکانت‌ها به‌صورت قانونی و با ضمانت اصالت عرضه می‌شوند.",
     icon: "shield",
     span: "",
   },
   {
-    title: "Own every line.",
-    body: "All code and IP is yours the moment it is written. Cancel whenever you want — the code stays.",
+    title: "ضمانت تعویض",
+    body: "اگر اکانت به هر دلیلی از کار افتاد، در بازه ضمانت جایگزین می‌شود.",
     icon: "refresh",
     span: "",
   },
   {
-    title: "A direct line to your squad.",
-    body: "A private channel with the engineers building your app. Roadmap input and bug fixes in days, not quarters.",
+    title: "پشتیبانی ۲۴/۷",
+    body: "قبل و بعد از خرید، پاسخگوی سوالات شما در تلگرام هستیم.",
     icon: "headset",
+    span: "",
+  },
+  {
+    title: "پرداخت کارت به کارت",
+    body: "بدون درگاه پرداخت، فقط با یک کارت به کارت ساده.",
+    icon: "store",
+    span: "",
+  },
+  {
+    title: "قیمت منصفانه",
+    body: "قیمت‌های رقابتی و شفاف، بدون هیچ هزینه پنهانی.",
+    icon: "code",
     span: "lg:col-span-2",
   },
 ];
@@ -76,70 +87,39 @@ export type Step = {
 
 export const steps: Step[] = [
   {
-    number: "01",
-    title: "Subscribe",
-    body: "Pick a plan, choose your platform, and hand over your product vision. Setup takes a single day.",
+    number: "۰۱",
+    title: "انتخاب اکانت",
+    body: "محصول موردنظرت را از لیست محصولات انتخاب کن.",
   },
   {
-    number: "02",
-    title: "Build & ship",
-    body: "We design, code, test and review a feature pack every month. Clean pull requests appear in your repo.",
+    number: "۰۲",
+    title: "پرداخت کارت به کارت",
+    body: "مبلغ را به شماره کارت سایت واریز کن.",
   },
   {
-    number: "03",
-    title: "Launch & scale",
-    body: "Merge, publish and iterate. Add platforms, scope or a dedicated squad as your product grows.",
+    number: "۰۳",
+    title: "تحویل در تلگرام",
+    body: "تصویر رسید را در تلگرام بفرست؛ اکانت آنی تحویل داده می‌شود.",
   },
 ];
 
-export type Tier = {
+export type Product = {
   name: string;
-  price: number | "Custom";
-  unit?: string;
+  price: number;
   tagline: string;
   features: string[];
-  featured: boolean;
+  featured?: boolean;
   badge?: string;
 };
 
-export const tiers: Tier[] = [
+export const products: Product[] = [
   {
-    name: "Starter",
-    price: 490,
-    tagline: "For validating your idea on one platform.",
-    features: [
-      "One platform (iOS or Android)",
-      "Monthly feature pack",
-      "Shared support queue",
-      "Your code and IP, always",
-    ],
-    featured: false,
-  },
-  {
-    name: "Pro",
-    price: 990,
-    tagline: "For products ready to grow on both platforms.",
-    features: [
-      "iOS + Android",
-      "Priority build queue",
-      "Roadmap input every sprint",
-      "Dedicated support channel",
-      "Bug-fix SLA within 48 hours",
-    ],
+    name: "اکانت opencode",
+    price: 2000000,
+    tagline: "دسترسی کامل به opencode با کیفیت بالا.",
+    features: ["اکانت اصلی و اورجینال", "تحویل آنی در تلگرام", "ضمانت تعویض", "پشتیبانی ۲۴/۷"],
     featured: true,
-    badge: "Most popular",
-  },
-  {
-    name: "Scale",
-    price: "Custom",
-    tagline: "For teams that need a full engineering partner.",
-    features: [
-      "Dedicated squad",
-      "Unlimited scope + codebase takeover",
-      "Architecture & migration work",
-      "SLA with guaranteed uptime",
-    ],
-    featured: false,
+    badge: "پیشنهاد ویژه",
   },
 ];
 
@@ -150,23 +130,19 @@ export type Faq = {
 
 export const faqs: Faq[] = [
   {
-    q: "Who owns the code?",
-    a: "You do. Every line we write is committed to your repository and licensed to you in full. There are no revenue shares, no lock-in and no licensing games.",
+    q: "اکانت چطور تحویل داده می‌شود؟",
+    a: "بعد از واریز کارت به کارت و ارسال تصویر رسید در تلگرام، اکانت به‌صورت آنی تحویل داده می‌شود.",
   },
   {
-    q: "How does delivery work?",
-    a: "We work directly in your repo. Each month we open pull requests with the agreed feature pack — fully tested, reviewed and documented. You merge when you're happy.",
+    q: "چه روش پرداختی دارید؟",
+    a: "فعلاً پرداخت فقط به‌صورت کارت به کارت انجام می‌شود. به‌زودی درگاه پرداخت آنلاین هم اضافه خواهد شد.",
   },
   {
-    q: "What stacks do you work in?",
-    a: "Swift + SwiftUI for iOS, Kotlin + Compose for Android, and React Native (Expo or bare) for cross-platform. Backend support for Node, Go, Supabase and Firebase.",
+    q: "اگر اکانت کار نکند چه می‌شود؟",
+    a: "تمام اکانت‌ها ضمانت دارند. در صورت بروز مشکل، در بازه ضمانت اکانت جایگزین می‌شود.",
   },
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. Month to month, cancel in one click. Everything we've shipped stays in your repo and remains yours.",
-  },
-  {
-    q: "When do subscriptions open?",
-    a: "We're onboarding the first cohort of waitlist members soon. Join the list to get early access and lock in launch pricing.",
+    q: "چطور با پشتیبانی تماس بگیرم؟",
+    a: "از طریق تلگرام در دسترس هستیم و در سریع‌ترین زمان پاسخگوی شما هستیم.",
   },
 ];

@@ -97,6 +97,31 @@ export function ArrowRightIcon(props: IconProps) {
   );
 }
 
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M19 12H5M11 6l-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function TelegramIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="m21 4-3 14.5-5.7-3L9 18l-.7-4.2L18.8 5.7 7 11.8 3.5 10 21 4Z" />
+    </svg>
+  );
+}
+
+export function CardIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="M2.5 9.5h19M6 15h4" />
+    </svg>
+  );
+}
+
 export function CheckIcon(props: IconProps) {
   return (
     <svg {...base(props)}>

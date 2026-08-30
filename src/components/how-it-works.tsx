@@ -8,8 +8,8 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
           <SectionHeading
-            kicker="How it works"
-            title="From signup to shipped in three steps."
+            kicker="نحوه خرید"
+            title="در سه قدم، اکانت مال تو."
           />
         </Reveal>
 

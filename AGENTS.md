@@ -8,18 +8,21 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# mobcode project
+# passkadeh project
 
-Marketing site for **mobcode** — a mobile-engineering subscription product.
+Persian (RTL) store site for **passkadeh** — sells AI accounts (opencode
+first; more later), paid via manual **card-to-card** with order/receipt
+handling in Telegram. No backend yet; see `PLAN.md` for the roadmap (more
+accounts → AI service packages → online checkout later).
 Stack: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, App
-Router. This page will later sell subscriptions (Stripe), so keep the pricing
-data in `src/lib/site.ts` ready to be wired to checkout.
+Router. All site copy is Persian; keep it that way unless asked.
 
 ## Structure
 
 - `src/app/page.tsx` — composes the landing page from section components.
-- `src/app/layout.tsx` — fonts (Unbounded/Sora/JetBrains Mono), metadata,
-  global overlays.
+- `src/app/layout.tsx` — fonts (Vazirmatn for Persian sans/display, Unbounded
+  for the latin brand wordmark, JetBrains Mono), `lang="fa" dir="rtl"`,
+  metadata, global overlays.
 - `src/app/globals.css` — Tailwind v4 theme tokens. All colors and fonts are
   theme-token driven: `bg-background`, `text-accent`, `font-display`,
   `font-sans`, `font-mono`, `border-line`, plus animation utilities
@@ -27,12 +30,18 @@ data in `src/lib/site.ts` ready to be wired to checkout.
   scroll-reveal class. Never hardcode hex values in components.
 - `src/components/` — one file per section. Server components by default; add
   `"use client"` only for interactivity (state/effects).
-- `src/lib/site.ts` — single source of truth for site copy (nav, features,
-  steps, tiers, faqs). Put copy here, not in components.
-- `src/lib/utils.ts` — `cn()` for conditional Tailwind classes.
+- `src/lib/site.ts` — single source of truth for site copy and config (site
+  info, telegram link, payment card, nav, features, steps, products, faqs).
+  Put copy here, not in components.
+- `src/lib/utils.ts` — `cn()` for conditional Tailwind classes, plus
+  `toFaDigits()` and `formatToman()` for Persian numerals/prices.
 
 ## Conventions
 
+- Persian copy everywhere; prices are numbers in Toman formatted with
+  `formatToman`. Card numbers render LTR in `font-mono`.
+- Brand name lives only in `site.name` (currently the placeholder
+  "passkadeh"); the logo derives from it.
 - Match the existing design system exactly; reuse existing components/patterns
   before writing new ones.
 - No new dependencies without asking first.

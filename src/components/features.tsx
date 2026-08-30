@@ -10,6 +10,7 @@ import {
   StoreIcon,
 } from "@/components/icons";
 import { features, type Feature } from "@/lib/site";
+import { toFaDigits } from "@/lib/utils";
 
 const iconMap: Record<string, ReactNode> = {
   rocket: <RocketIcon className="size-5" />,
@@ -27,7 +28,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
         <span className="grid size-11 place-items-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
           {iconMap[feature.icon]}
         </span>
-        <span className="font-mono text-xs text-muted">0{index + 1}</span>
+        <span className="font-mono text-xs text-muted">{toFaDigits(index + 1)}</span>
       </div>
       <h3 className="font-display text-lg font-semibold leading-snug">
         {feature.title}
@@ -43,9 +44,9 @@ export function Features() {
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
           <SectionHeading
-            kicker="Features"
-            title="Everything a modern app needs."
-            sub="One team, one subscription. We own the release cadence so you can own the roadmap."
+            kicker="چرا پس‌کده"
+            title="خرید مطمئن، تحویل سریع."
+            sub="از انتخاب اکانت تا تحویل، همه‌چیز ساده و شفاف طراحی شده است."
           />
         </Reveal>
 
