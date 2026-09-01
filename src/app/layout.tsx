@@ -36,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="fa"
       dir="rtl"
+      data-scroll-behavior="smooth"
       className={`${unbounded.variable} ${vazirmatn.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
