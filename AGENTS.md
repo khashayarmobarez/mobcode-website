@@ -58,6 +58,17 @@ managed block above). Key v16 breaking changes to remember:
   Put copy here, not in components.
 - `src/lib/utils.ts` — `cn()` for conditional Tailwind classes, plus
   `toFaDigits()` and `formatToman()` for Persian numerals/prices.
+- `src/lib/prisma.ts` — Prisma 7 client singleton (Neon HTTP driver adapter).
+  Generated client lives at `src/generated/prisma` (run `npx prisma
+  generate`; never hand-edit).
+- `src/lib/admin-auth.ts` — admin cookie (HMAC of `ADMIN_PASSWORD`); pure
+  `verifyAdminToken` for proxy, async cookie helpers for routes.
+- `src/lib/telegram.ts` — `sendOrderNotification` via Bot API `sendPhoto`.
+- `src/proxy.ts` — Next 16 proxy (was middleware): guards `/admin/orders`.
+- `src/app/api/` — `orders` (POST public / GET admin), `orders/[id]` (PATCH
+  admin), `admin/login` (POST/DELETE). Receipts upload to Vercel Blob.
+- `src/app/admin/` — login page + orders list; `src/components/order-form.tsx`
+  on `/buy` submits orders.
 
 ## Conventions
 
@@ -74,6 +85,17 @@ managed block above). Key v16 breaking changes to remember:
 
 Always run after changes: `npm run lint` then `npm run build` (build also runs
 TypeScript checks). Start `npm run dev` to exercise behavior.
+
+## Backend
+
+- Env vars live in `.env.local` (gitignored) and must be mirrored in Vercel:
+  `DATABASE_URL`, `ADMIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`,
+  `TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN`.
+- Prisma 7: schema in `prisma/schema.prisma`, config in `prisma.config.ts`
+  (loads `.env.local`, datasource URL). No `url` in schema — it moved to the
+  config. Run `npm run db:migrate` after schema changes, `npm run
+  db:studio` to inspect.
+- Never hand-edit `src/generated/prisma`.
 
 ## Agent team
 

@@ -16,14 +16,40 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Backend setup
+
+Orders are stored in Neon (Postgres via Prisma 7) and receipt images in
+Vercel Blob; new orders notify the owner via a Telegram bot. Set these env
+vars in `.env.local` (and in Vercel):
+
+```
+DATABASE_URL=<neon pooled url>
+ADMIN_PASSWORD=<admin login password>
+TELEGRAM_BOT_TOKEN=<bot token from @BotFather>
+TELEGRAM_ADMIN_CHAT_ID=<chat id receiving order notifications>
+BLOB_READ_WRITE_TOKEN=<from Vercel Blob storage>
+```
+
+Run migrations after pulling schema changes:
+
+```bash
+npm run db:migrate   # apply local dev migrations
+```
+
+Admin panel: `http://localhost:3000/admin` (login), then `/admin/orders`.
+
 ## Structure
 
 - `src/app/` — layout (RTL, Vazirmatn/Unbounded/JetBrains Mono fonts), page
-  composition, theme tokens in `globals.css` (light navy/blue palette).
-- `src/components/` — one file per section (hero, products, payment-info, …).
+  composition, theme tokens in `globals.css` (light navy/blue palette),
+  API routes under `src/app/api/`, admin pages under `src/app/admin/`.
+- `src/components/` — one file per section (hero, products, payment-info,
+  order-form, …).
 - `src/lib/site.ts` — all copy and config: brand, telegram, payment card,
   nav, products, faqs. Edit prices/products here.
 - `src/lib/utils.ts` — `cn()`, `toFaDigits()`, `formatToman()`.
+- `src/lib/prisma.ts` / `src/lib/telegram.ts` / `src/lib/admin-auth.ts` —
+  DB client, Telegram notifications, admin cookie helpers.
 
 ## Verification
 

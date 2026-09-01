@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PaymentInfo } from "@/components/payment-info";
+import { OrderForm } from "@/components/order-form";
 import { products } from "@/lib/site";
 import { formatToman } from "@/lib/utils";
 
@@ -66,6 +67,10 @@ export default function BuyPage() {
         </section>
 
         <PaymentInfo />
+
+        <section className="mx-auto max-w-3xl px-5 pb-24">
+          <OrderForm />
+        </section>
       </main>
       <Footer />
     </>

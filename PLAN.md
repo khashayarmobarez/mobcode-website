@@ -69,6 +69,36 @@ copy button, all anchors).
 - `data-scroll-behavior="smooth"` on `<html>` (Next 16 no longer overrides
   smooth-scroll on SPA navigation by default).
 
+## Phase 7 — Backend: orders + Telegram + admin (done)
+
+- **Stack**: Neon Postgres via Prisma 7 (driver adapter
+  `@prisma/adapter-neon`, HTTP — no WebSocket), Vercel Blob for receipt
+  images, Telegram Bot API for owner notifications, `proxy.ts` guard for
+  admin. Env: `ADMIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`,
+  `TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN` (all in `.env.local`,
+  set in Vercel too).
+- `prisma/schema.prisma` — `Order` model (productName/productPrice snapshot,
+  telegram, note?, receiptUrl, `OrderStatus` enum `PENDING/PAID/DELIVERED/
+  CANCELLED`). Generated client at `src/generated/prisma` (gitignored).
+  `prisma.config.ts` loads `.env.local` and holds the datasource URL.
+- API (Route Handlers, all async per v16):
+  - `POST /api/orders` (public) — multipart form: product + telegram + note
+    + receipt image (≤4MB, jpg/png/webp) → upload to Blob → insert Order →
+    Telegram `sendPhoto` notification to owner.
+  - `GET /api/orders` (admin cookie) — list orders.
+  - `PATCH /api/orders/[id]` (admin cookie) — update status.
+  - `POST/DELETE /api/admin/login` — password check (constant-time) → HMAC
+    httpOnly cookie.
+- Admin: `/admin` login form, `/admin/orders` list with receipt link and
+  status buttons. `src/proxy.ts` (v16 middleware) redirects unauthenticated
+  `/admin/orders` → `/admin`; real auth re-checked in routes/pages.
+- Buy page: `src/components/order-form.tsx` — product select, Telegram
+  handle, note, receipt upload; posts to `/api/orders`.
+- Migrations: `npm run db:migrate` (dev), `npm run db:studio`;
+  `vercel-build: prisma migrate deploy && next build`; `postinstall: prisma
+  generate`.
+- Payment remains manual card-to-card; backend records orders/receipts.
+
 ## Next up (future phases, in order)
 
 1. **Fill placeholders** — final brand name, card holder name, real Telegram
