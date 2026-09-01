@@ -11,8 +11,7 @@ No backend for now.
   `next/font/google`, Unbounded kept for the latin brand wordmark, JetBrains
   Mono for latin/mono accents. Persian metadata from `site.ts`.
 - `src/app/globals.css`: `--font-display` / `--font-sans` → Vazirmatn tokens.
-  Theme colors unchanged (dark + lime); a mobarrez-style theme is a separate
-  future change.
+  See Phase 6 for the theme palette rebrand.
 
 ## Phase 2 — Data & copy (done)
 
@@ -58,6 +57,17 @@ No backend for now.
 
 `npm run lint` → `npm run build` → `npm run dev` (check RTL, Persian fonts,
 copy button, all anchors).
+
+## Phase 6 — Theme rebrand (done)
+
+- Swapped the dark-lime palette for a **light navy/blue** theme:
+  background `#F8FAFC`, surface `#FFF`, surface-2 `#EFF6FF`, text `#0F172A`,
+  muted `#64748B`, accent `#2563EB`, border `#E2E8F0` — all via tokens in
+  `src/app/globals.css`.
+- Added `--accent-bright` (`#3B82F6`) and `--accent-glow` tokens; featured
+  card / payment glow shadows now use `var(--accent-glow)`.
+- `data-scroll-behavior="smooth"` on `<html>` (Next 16 no longer overrides
+  smooth-scroll on SPA navigation by default).
 
 ## Next up (future phases, in order)
 

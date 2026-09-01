@@ -15,7 +15,26 @@ first; more later), paid via manual **card-to-card** with order/receipt
 handling in Telegram. No backend yet; see `PLAN.md` for the roadmap (more
 accounts → AI service packages → online checkout later).
 Stack: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, App
-Router. All site copy is Persian; keep it that way unless asked.
+Router. Requires Node.js 20.9+. All site copy is Persian; keep it that way
+unless asked.
+
+## Next.js 16 gotchas
+
+Read guides in `node_modules/next/dist/docs/` before writing code (see the
+managed block above). Key v16 breaking changes to remember:
+
+- **Turbopack is the default bundler** for both `next dev` and `next build` —
+  no `--turbopack` flag needed; a custom `webpack()` config makes `next build`
+  fail.
+- **`next lint` removed** (`eslint` config option in next.config gone); run
+  `eslint` directly (`npm run lint`). `next build` no longer runs linting.
+- **Async request APIs**: `params`, `searchParams`, `cookies()`, `headers()`,
+  `draftMode()` are all Promises — await them.
+- **`middleware` renamed to `proxy`** (Node runtime only, no `edge`).
+- **Dev output is separate**: `next dev` writes to `.next/dev` while
+  `next build` writes to `.next`.
+- `data-scroll-behavior="smooth"` on `<html>` restores Next's override of
+  CSS smooth-scroll during SPA route transitions (we keep it set).
 
 ## Structure
 
@@ -25,8 +44,10 @@ Router. All site copy is Persian; keep it that way unless asked.
 - `src/app/layout.tsx` — fonts (Vazirmatn for Persian sans/display, Unbounded
   for the latin brand wordmark, JetBrains Mono), `lang="fa" dir="rtl"`,
   metadata, global overlays.
-- `src/app/globals.css` — Tailwind v4 theme tokens. All colors and fonts are
-  theme-token driven: `bg-background`, `text-accent`, `font-display`,
+- `src/app/globals.css` — Tailwind v4 theme tokens (light navy/blue theme:
+  background `#F8FAFC`, text `#0F172A`, accent `#2563EB`, surface `#FFF`,
+  border `#E2E8F0`, glow shadows via `--accent-glow`). All colors and fonts
+  are theme-token driven: `bg-background`, `text-accent`, `font-display`,
   `font-sans`, `font-mono`, `border-line`, plus animation utilities
   (`animate-fade-up`, `animate-blink`, `animate-marquee`) and the `.reveal`
   scroll-reveal class. Never hardcode hex values in components.

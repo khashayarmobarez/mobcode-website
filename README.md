@@ -7,6 +7,8 @@ Built with Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4.
 
 ## Getting started
 
+Requires [Node.js 20.9+](https://nodejs.org/).
+
 ```bash
 npm install
 npm run dev
@@ -17,7 +19,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Structure
 
 - `src/app/` — layout (RTL, Vazirmatn/Unbounded/JetBrains Mono fonts), page
-  composition, theme tokens in `globals.css`.
+  composition, theme tokens in `globals.css` (light navy/blue palette).
 - `src/components/` — one file per section (hero, products, payment-info, …).
 - `src/lib/site.ts` — all copy and config: brand, telegram, payment card,
   nav, products, faqs. Edit prices/products here.
