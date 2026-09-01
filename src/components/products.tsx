@@ -11,7 +11,7 @@ function ProductCard({ product }: { product: Product }) {
       className={cn(
         "relative flex h-full flex-col rounded-2xl border p-8 transition-transform duration-300 hover:-translate-y-1",
         product.featured
-          ? "border-accent bg-surface-2 shadow-[0_0_80px_-24px_rgba(200,242,75,0.4)]"
+          ? "border-accent bg-surface-2 shadow-[0_0_80px_-24px_var(--accent-glow)]"
           : "border-line bg-surface hover:border-accent/40"
       )}
     >

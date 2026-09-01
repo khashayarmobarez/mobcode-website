@@ -45,7 +45,7 @@ export function PaymentInfo() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 rounded-2xl border border-accent/40 bg-surface-2 p-8 text-center shadow-[0_0_80px_-24px_rgba(200,242,75,0.4)]">
+          <div className="mt-12 rounded-2xl border border-accent/40 bg-surface-2 p-8 text-center shadow-[0_0_80px_-24px_var(--accent-glow)]">
             <span className="mx-auto grid size-12 place-items-center rounded-xl bg-accent/10 text-accent">
               <CardIcon className="size-6" />
             </span>

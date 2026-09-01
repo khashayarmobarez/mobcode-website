@@ -2,7 +2,7 @@ import { ArrowLeftIcon } from "@/components/icons";
 
 function TerminalMock() {
   return (
-    <div className="relative rounded-2xl border border-line bg-surface/80 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] backdrop-blur-sm">
+    <div className="relative rounded-2xl border border-line bg-surface/80 shadow-[0_30px_80px_-20px_rgba(15,23,42,0.12)] backdrop-blur-sm">
       <div className="flex items-center gap-2 border-b border-line px-5 py-3.5">
         <span className="size-2.5 rounded-full bg-[#ff5f57]/80" />
         <span className="size-2.5 rounded-full bg-[#febc2e]/80" />
