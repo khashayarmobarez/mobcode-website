@@ -79,7 +79,7 @@ export default async function AdminOrdersPage() {
               </div>
 
               <a
-                href={order.receiptUrl}
+                href={`/api/orders/${order.id}/receipt`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 rounded-xl border border-line px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent/50"

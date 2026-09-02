@@ -66,7 +66,9 @@ managed block above). Key v16 breaking changes to remember:
 - `src/lib/telegram.ts` — `sendOrderNotification` via Bot API `sendPhoto`.
 - `src/proxy.ts` — Next 16 proxy (was middleware): guards `/admin/orders`.
 - `src/app/api/` — `orders` (POST public / GET admin), `orders/[id]` (PATCH
-  admin), `admin/login` (POST/DELETE). Receipts upload to Vercel Blob.
+  admin), `orders/[id]/receipt` (GET admin — streams private receipt),
+  `admin/login` (POST/DELETE). Receipts upload to Vercel Blob with private
+  access.
 - `src/app/admin/` — login page + orders list; `src/components/order-form.tsx`
   on `/buy` submits orders.
 

@@ -83,10 +83,14 @@ copy button, all anchors).
   `prisma.config.ts` loads `.env.local` and holds the datasource URL.
 - API (Route Handlers, all async per v16):
   - `POST /api/orders` (public) — multipart form: product + telegram + note
-    + receipt image (≤4MB, jpg/png/webp) → upload to Blob → insert Order →
-    Telegram `sendPhoto` notification to owner.
+    + receipt image (≤4MB, jpg/png/webp) → upload to Blob (**private
+    access**) → insert Order → Telegram `sendPhoto` (multipart file upload;
+    dropped if it fails).
   - `GET /api/orders` (admin cookie) — list orders.
   - `PATCH /api/orders/[id]` (admin cookie) — update status.
+  - `GET /api/orders/[id]/receipt` (admin cookie) — streams the private
+    receipt blob (`get` with auto-auth); receipts never exposed as public
+    URLs.
   - `POST/DELETE /api/admin/login` — password check (constant-time) → HMAC
     httpOnly cookie.
 - Admin: `/admin` login form, `/admin/orders` list with receipt link and

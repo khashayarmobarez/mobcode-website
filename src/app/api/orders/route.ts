@@ -57,7 +57,7 @@ export async function POST(request: Request) {
   const receiptUrl = await put(
     `receipts/${Date.now()}-${file.name.replace(/[^\w.\-]/g, "")}`,
     file,
-    { access: "public", contentType: file.type },
+    { access: "private", contentType: file.type },
   ).then((blob) => blob.url);
 
   const order = await prisma.order.create({
@@ -70,14 +70,16 @@ export async function POST(request: Request) {
     },
   });
 
-  await sendOrderNotification({
-    id: order.id,
-    productName: order.productName,
-    productPrice: order.productPrice,
-    telegram: order.telegram,
-    note: order.note,
-    receiptUrl: order.receiptUrl,
-  });
+  await sendOrderNotification(
+    {
+      id: order.id,
+      productName: order.productName,
+      productPrice: order.productPrice,
+      telegram: order.telegram,
+      note: order.note,
+    },
+    { bytes: await file.arrayBuffer(), filename: file.name, type: file.type },
+  );
 
   return NextResponse.json({ id: order.id }, { status: 201 });
 }

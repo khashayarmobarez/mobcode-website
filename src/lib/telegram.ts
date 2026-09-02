@@ -6,7 +6,12 @@ type OrderNotification = {
   productPrice: number;
   telegram: string;
   note?: string | null;
-  receiptUrl: string;
+};
+
+type ReceiptFile = {
+  bytes: ArrayBuffer;
+  filename: string;
+  type: string;
 };
 
 export function orderCaption(order: OrderNotification) {
@@ -23,7 +28,10 @@ export function orderCaption(order: OrderNotification) {
   return lines.join("\n");
 }
 
-export async function sendOrderNotification(order: OrderNotification) {
+export async function sendOrderNotification(
+  order: OrderNotification,
+  receipt: ReceiptFile,
+) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
   if (!token || !chatId) {
@@ -32,21 +40,21 @@ export async function sendOrderNotification(order: OrderNotification) {
   }
 
   const caption = orderCaption(order);
+  const form = new FormData();
+  form.set("chat_id", chatId);
+  form.set("caption", caption);
+  form.set("parse_mode", "HTML");
+  form.set(
+    "photo",
+    new Blob([receipt.bytes], { type: receipt.type }),
+    receipt.filename,
+  );
 
   try {
-    const res = await fetch(
-      `https://api.telegram.org/bot${token}/sendPhoto`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          photo: order.receiptUrl,
-          caption,
-          parse_mode: "HTML",
-        }),
-      },
-    );
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+      method: "POST",
+      body: form,
+    });
     if (!res.ok) {
       console.warn("Telegram sendPhoto failed", res.status, await res.text());
     }
