@@ -4,6 +4,7 @@ import { CheckIcon } from "@/components/icons";
 import { products, type Product } from "@/lib/site";
 import { formatToman } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -37,8 +38,8 @@ function ProductCard({ product }: { product: Product }) {
         ))}
       </ul>
 
-      <a
-        href="/buy"
+      <Link
+        href="/shop"
         className={cn(
           "mt-8 rounded-full py-3 text-center text-sm font-semibold transition-all hover:-translate-y-0.5",
           product.featured
@@ -47,7 +48,7 @@ function ProductCard({ product }: { product: Product }) {
         )}
       >
         ثبت سفارش و پرداخت
-      </a>
+      </Link>
     </div>
   );
 }

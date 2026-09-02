@@ -65,7 +65,7 @@ export function Footer() {
             links={[
               { label: "اکانت‌ها", href: "/#products" },
               { label: "نحوه خرید", href: "/#how" },
-              { label: "خرید", href: "/buy" },
+              { label: "فروشگاه", href: "/shop" },
               { label: "سوالات متداول", href: "/#faq" },
             ]}
           />

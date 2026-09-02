@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowLeftIcon } from "@/components/icons";
 
 export function CtaBanner() {
@@ -13,13 +14,13 @@ export function CtaBanner() {
         <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted">
           همین حالا سفارشت را ثبت کن؛ کمتر از چند دقیقه اکانت تحویل داده می‌شود.
         </p>
-        <a
-          href="/buy"
+        <Link
+          href="/shop"
           className="group mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
         >
           ثبت سفارش
           <ArrowLeftIcon className="size-4 transition-transform group-hover:-translate-x-0.5" />
-        </a>
+        </Link>
       </div>
     </section>
   );

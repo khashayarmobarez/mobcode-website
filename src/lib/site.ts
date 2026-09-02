@@ -20,7 +20,7 @@ export const payment = {
 export const navLinks = [
   { label: "محصولات", href: "/#products" },
   { label: "نحوه خرید", href: "/#how" },
-  { label: "خرید", href: "/buy" },
+  { label: "فروشگاه", href: "/shop" },
   { label: "سوالات", href: "/#faq" },
 ];
 

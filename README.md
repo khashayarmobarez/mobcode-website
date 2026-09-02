@@ -43,13 +43,17 @@ Admin panel: `http://localhost:3000/admin` (login), then `/admin/orders`.
 - `src/app/` — layout (RTL, Vazirmatn/Unbounded/JetBrains Mono fonts), page
   composition, theme tokens in `globals.css` (light navy/blue palette),
   API routes under `src/app/api/`, admin pages under `src/app/admin/`.
+- `src/app/shop/` — catalog list (`/shop`) + product detail (`/shop/[slug]`)
+  with variants and the order form.
 - `src/components/` — one file per section (hero, products, payment-info,
   order-form, …).
-- `src/lib/site.ts` — all copy and config: brand, telegram, payment card,
-  nav, products, faqs. Edit prices/products here.
+- `src/lib/site.ts` — static copy and config (brand, telegram, payment card,
+  nav, landing products, faqs). The actual product catalog lives in the DB
+  (managed via `/admin/products`).
 - `src/lib/utils.ts` — `cn()`, `toFaDigits()`, `formatToman()`.
-- `src/lib/prisma.ts` / `src/lib/telegram.ts` / `src/lib/admin-auth.ts` —
-  DB client, Telegram notifications, admin cookie helpers.
+- `src/lib/prisma.ts` / `src/lib/products.ts` / `src/lib/telegram.ts` /
+  `src/lib/admin-auth.ts` — DB client, catalog queries, Telegram
+  notifications, admin cookie helpers.
 
 ## Verification
 

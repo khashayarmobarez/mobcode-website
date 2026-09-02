@@ -39,8 +39,10 @@ managed block above). Key v16 breaking changes to remember:
 ## Structure
 
 - `src/app/page.tsx` — composes the landing page from section components.
-- `src/app/buy/page.tsx` — the buy page: order summary + card-to-card payment
-  panel. Payment card info appears ONLY here, never on the landing page.
+- `src/app/shop/page.tsx` — DB-driven catalog of active products.
+- `src/app/shop/[slug]/page.tsx` — product detail: variants, payment panel,
+  order form.
+- `src/app/buy/page.tsx` — redirects to `/shop`.
 - `src/app/layout.tsx` — fonts (Vazirmatn for Persian sans/display, Unbounded
   for the latin brand wordmark, JetBrains Mono), `lang="fa" dir="rtl"`,
   metadata, global overlays.
@@ -67,10 +69,13 @@ managed block above). Key v16 breaking changes to remember:
 - `src/proxy.ts` — Next 16 proxy (was middleware): guards `/admin/orders`.
 - `src/app/api/` — `orders` (POST public / GET admin), `orders/[id]` (PATCH
   admin), `orders/[id]/receipt` (GET admin — streams private receipt),
-  `admin/login` (POST/DELETE). Receipts upload to Vercel Blob with private
-  access.
-- `src/app/admin/` — login page + orders list; `src/components/order-form.tsx`
-  on `/buy` submits orders.
+  `admin/login` (POST/DELETE), `admin/products` + `[id]` + `[id]/variants` +
+  `variants/[id]` + `[id]/image` (admin CRUD), `products/[slug]/image` (GET
+  public — streams product cover). Receipts upload to Vercel Blob with
+  private access; product covers too.
+- `src/app/admin/` — login page + orders list + products CRUD;
+  `src/components/order-form.tsx` submits orders (variant-aware) on
+  `/shop/[slug]`.
 
 ## Conventions
 
@@ -96,7 +101,11 @@ TypeScript checks). Start `npm run dev` to exercise behavior.
 - Prisma 7: schema in `prisma/schema.prisma`, config in `prisma.config.ts`
   (loads `.env.local`, datasource URL). No `url` in schema — it moved to the
   config. Run `npm run db:migrate` after schema changes, `npm run
-  db:studio` to inspect.
+  db:studio` to inspect. Models: `Product` + `Variant` (catalog, edited in
+  admin) and `Order` (snapshots names/price incl. `variantName`).
+- The Neon HTTP adapter (`PrismaNeonHttp`) does **not** support
+  `$transaction` — write sequential queries, avoid nested `create` on
+  relations.
 - Never hand-edit `src/generated/prisma`.
 
 ## Agent team

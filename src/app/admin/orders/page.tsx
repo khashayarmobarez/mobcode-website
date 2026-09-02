@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatToman, toFaDigits } from "@/lib/utils";
+import { AdminNav } from "../admin-nav";
 import { OrderStatusButtons } from "./order-status-buttons";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,8 @@ export default async function AdminOrdersPage() {
 
   return (
     <main className="mx-auto max-w-4xl px-5 py-12">
+      <AdminNav active="/admin/orders" />
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-display text-2xl font-bold">سفارش‌ها</h1>
@@ -66,6 +69,9 @@ export default async function AdminOrdersPage() {
                 </div>
                 <h2 className="mt-2 font-display text-lg font-semibold">
                   {order.productName}
+                  {order.variantName && (
+                    <span className="text-accent"> · {order.variantName}</span>
+                  )}
                 </h2>
                 <p className="mt-1 text-sm text-muted">
                   {formatToman(order.productPrice)} · تلگرام @{order.telegram}

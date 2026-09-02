@@ -1,15 +1,24 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { products } from "@/lib/site";
-import { toFaDigits } from "@/lib/utils";
+import { toFaDigits, formatToman } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const MAX_SIZE = 4 * 1024 * 1024;
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 
-export function OrderForm() {
-  const [product, setProduct] = useState(products[0].name);
+type Variant = { id: string; name: string; price: number };
+
+export function OrderForm({
+  productName,
+  productSlug,
+  variants,
+}: {
+  productName: string;
+  productSlug: string;
+  variants: Variant[];
+}) {
+  const [variantId, setVariantId] = useState(variants[0]?.id ?? "");
   const [telegram, setTelegram] = useState("");
   const [note, setNote] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -17,10 +26,16 @@ export function OrderForm() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
 
+  const selectedVariant = variants.find((v) => v.id === variantId);
+
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
 
+    if (!variantId) {
+      setError("یک گزینه را انتخاب کن.");
+      return;
+    }
     if (!file) {
       setError("تصویر رسید را انتخاب کن.");
       return;
@@ -37,7 +52,8 @@ export function OrderForm() {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.set("product", product);
+      formData.set("product", productSlug);
+      formData.set("variantId", variantId);
       formData.set("telegram", telegram);
       formData.set("note", note);
       formData.set("receipt", file);
@@ -49,7 +65,9 @@ export function OrderForm() {
         const message =
           data?.error === "invalid_telegram"
             ? "نام کاربری تلگرام معتبر نیست."
-            : "ثبت سفارش ناموفق بود؛ دوباره تلاش کن.";
+            : data?.error === "unknown_variant"
+              ? "گزینه انتخاب‌شده نامعتبر است."
+              : "ثبت سفارش ناموفق بود؛ دوباره تلاش کن.";
         setError(message);
         return;
       }
@@ -89,19 +107,36 @@ export function OrderForm() {
       <div className="mt-6 space-y-5">
         <div>
           <label className="mb-1.5 block text-sm font-semibold text-foreground">
-            محصول
+            نوع اکانت
           </label>
-          <select
-            value={product}
-            onChange={(e) => setProduct(e.target.value)}
-            className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
-          >
-            {products.map((p) => (
-              <option key={p.name} value={p.name}>
-                {p.name}
-              </option>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {variants.map((v) => (
+              <button
+                key={v.id}
+                type="button"
+                onClick={() => setVariantId(v.id)}
+                className={cn(
+                  "rounded-xl border px-4 py-3 text-right transition-colors",
+                  variantId === v.id
+                    ? "border-accent bg-accent/10"
+                    : "border-line bg-background hover:border-accent/40"
+                )}
+              >
+                <span className="block text-sm font-semibold text-foreground">
+                  {v.name}
+                </span>
+                <span className="mt-1 block font-display text-sm font-bold text-accent">
+                  {formatToman(v.price)}
+                </span>
+              </button>
             ))}
-          </select>
+          </div>
+          <p className="mt-2 text-xs text-muted">
+            {productName} ·{" "}
+            {selectedVariant
+              ? `مبلغ قابل پرداخت: ${formatToman(selectedVariant.price)}`
+              : "یک گزینه انتخاب کن"}
+          </p>
         </div>
 
         <div>

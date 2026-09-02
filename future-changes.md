@@ -1,7 +1,7 @@
 1- نهایی‌کردن نام برند (الان "passkadeh" موقتی است) — فقط `site.name` در `src/lib/site.ts` را عوض کن
 2- نوشتن نام صاحب کارت — `payment.holderName` در `src/lib/site.ts` (فعلاً خالی است و رندر نمی‌شود)
 3- گذاشتن لینک واقعی تلگرام — `site.telegram` در `src/lib/site.ts`
-4- بازبینی قیمت اکانت opencode (الان ۲٬۰۰۰٬۰۰۰ تومان) و افزودن اکانت‌های دیگر به `products`
+4- بازبینی قیمت‌ها (opencode و cline الان به‌صورت موقت seed شده‌اند) و ثبت نام‌های واقعی در پنل ادمین (`/admin/products`)
 5- پرکردن متغیرهای محیطی بک‌اند (فعلاً خالی): `ADMIN_PASSWORD`، `TELEGRAM_BOT_TOKEN`، `TELEGRAM_ADMIN_CHAT_ID`، `BLOB_READ_WRITE_TOKEN` — هم در `.env.local` هم در Vercel
 6- فاز بعدی: فروش پکیج خدمات هوش مصنوعی
 7- فاز بعد: فعال‌سازی درگاه پرداخت آنلاین در خود سایت

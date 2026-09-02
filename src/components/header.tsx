@@ -36,7 +36,7 @@ export function Header() {
             @{site.telegram}
           </a>
           <Link
-            href="/buy"
+            href="/shop"
             className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
           >
             خرید اکانت
@@ -67,7 +67,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/buy"
+              href="/shop"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-background"
             >

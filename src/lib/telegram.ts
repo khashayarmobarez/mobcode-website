@@ -3,6 +3,7 @@ import { formatToman, toFaDigits } from "@/lib/utils";
 type OrderNotification = {
   id: string;
   productName: string;
+  variantName?: string | null;
   productPrice: number;
   telegram: string;
   note?: string | null;
@@ -19,6 +20,7 @@ export function orderCaption(order: OrderNotification) {
     `🛒 سفارش جدید`,
     `—`,
     `محصول: ${order.productName}`,
+    order.variantName ? `گزینه: ${order.variantName}` : null,
     `قیمت: ${formatToman(order.productPrice)}`,
     `تلگرام: @${order.telegram}`,
     order.note ? `یادداشت: ${order.note}` : null,

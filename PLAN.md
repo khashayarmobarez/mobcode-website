@@ -103,13 +103,44 @@ copy button, all anchors).
   generate`.
 - Payment remains manual card-to-card; backend records orders/receipts.
 
+## Phase 8 — Product catalog & admin management (done)
+
+- **DB**: new `Product` (slug unique, name, tagline, `features String[]`,
+  badge?, featured, active soft-toggle, imagePath?) + `Variant` (name, price,
+  active, sortOrder, cascade-delete on product). `Order` gains `variantName`
+  snapshot; `productPrice` now snapshots the chosen variant's price.
+- **Storefront**:
+  - `/shop` — DB-driven list of active products (cover image, badge, starting
+    price = min active variant) with links to detail.
+  - `/shop/[slug]` — detail page: image, features, variant selector with
+    prices + live selected price, then payment panel + variant-aware order
+    form (telegram, note, receipt upload) on the same page.
+  - `/api/products/[slug]/image` — streams the private cover blob (public
+    route; product covers are public-facing).
+  - `/buy` now redirects to `/shop`; header/footer/nav CTA point to `/shop`;
+    landing products section stays static, CTA → `/shop`.
+- **Admin** (`/admin/products` + new/edit pages, tabs with سفارش‌ها):
+  - CRUD products + variants (create/update/delete/sort), cover image upload
+    to private Blob (`products/<id>/cover.<ext>`, deletes old on replace),
+    active toggle for soft-hide.
+  - API: `admin/products` (GET/POST), `admin/products/[id]` (PATCH/DELETE),
+    `admin/products/[id]/variants` (POST), `admin/variants/[id]`
+    (PATCH/DELETE), `admin/products/[id]/image` (POST). All admin-cookie
+    guarded; proxy matcher covers `/admin/products`.
+- **Order flow**: `POST /api/orders` validates product (active) + variant
+  (belongs to product, active) against DB, snapshots names + variant price;
+  Telegram caption includes variant name.
+- **Note**: Neon HTTP adapter (`PrismaNeonHttp`) does **not** support
+  `$transaction` — avoid it; write sequential queries (variants synced one
+  by one, no nested creates).
+
 ## Next up (future phases, in order)
 
 1. **Fill placeholders** — final brand name, card holder name, real Telegram
    link, real price review (see `future-changes.md`).
-2. **More accounts** — add entries to `products` in `site.ts`; layout already
-   supports a 3-col grid when 2+ products exist.
+2. **More accounts** — now via admin (`/admin/products`): create products +
+   variants; storefront picks them up automatically.
 3. **AI service packages** — new section/page selling service bundles; reuse
-   the `Product` data shape.
-4. **Online checkout** — wire `products` to a payment gateway (Stripe or a
+   the `Product`/`Variant` data shape.
+4. **Online checkout** — wire variants to a payment gateway (Stripe or a
    local PSP) when in-site selling activates; keep card-to-card as fallback.
