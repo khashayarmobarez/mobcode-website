@@ -49,7 +49,7 @@ export default async function ProductPage({
               {product.imagePath ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={`/api/products/${product.slug}/image`}
+                  src={`/api/products/${product.slug}/image?v=${product.updatedAt.getTime()}`}
                   alt={product.name}
                   className="aspect-[16/10] w-full rounded-2xl border border-line object-cover"
                 />

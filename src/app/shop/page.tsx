@@ -68,7 +68,7 @@ export default async function ShopPage() {
                   {product.imagePath ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={`/api/products/${product.slug}/image`}
+                      src={`/api/products/${product.slug}/image?v=${product.updatedAt.getTime()}`}
                       alt={product.name}
                       className="mb-6 aspect-[16/9] w-full rounded-xl object-cover"
                     />

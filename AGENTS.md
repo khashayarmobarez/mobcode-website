@@ -10,10 +10,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # passkadeh project
 
-Persian (RTL) store site for **passkadeh** — sells AI accounts (opencode
-first; more later), paid via manual **card-to-card** with order/receipt
-handling in Telegram. No backend yet; see `PLAN.md` for the roadmap (more
-accounts → AI service packages → online checkout later).
+Persian (RTL) store site for **passkadeh** — sells AI accounts (opencode,
+Cline, more via admin), paid via manual **card-to-card** with order/receipt
+handling in Telegram. Catalog lives in Neon (Postgres); receipts/cover
+images in Vercel Blob; see `PLAN.md` for the roadmap (AI service packages →
+online checkout later).
 Stack: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, App
 Router. Requires Node.js 20.9+. All site copy is Persian; keep it that way
 unless asked.
@@ -63,10 +64,15 @@ managed block above). Key v16 breaking changes to remember:
 - `src/lib/prisma.ts` — Prisma 7 client singleton (Neon HTTP driver adapter).
   Generated client lives at `src/generated/prisma` (run `npx prisma
   generate`; never hand-edit).
-- `src/lib/admin-auth.ts` — admin cookie (HMAC of `ADMIN_PASSWORD`); pure
-  `verifyAdminToken` for proxy, async cookie helpers for routes.
+- `src/lib/products.ts` — catalog queries (`activeProducts`,
+  `productBySlug`), wrapped in `React.cache()`.
+- `src/lib/admin-token.ts` — pure admin token crypto (`verifyAdminToken`,
+  `createAdminToken`, `ADMIN_COOKIE`) — no React imports; safe for proxy.
+- `src/lib/admin-auth.ts` — cookie helpers on top of `admin-token` for
+  routes (`isAdminRequest`, `setAdminCookie`, `clearAdminCookie`).
 - `src/lib/telegram.ts` — `sendOrderNotification` via Bot API `sendPhoto`.
-- `src/proxy.ts` — Next 16 proxy (was middleware): guards `/admin/orders`.
+- `src/proxy.ts` — Next 16 proxy (was middleware): guards `/admin/orders`
+  and `/admin/products`.
 - `src/app/api/` — `orders` (POST public / GET admin), `orders/[id]` (PATCH
   admin), `orders/[id]/receipt` (GET admin — streams private receipt),
   `admin/login` (POST/DELETE), `admin/products` + `[id]` + `[id]/variants` +

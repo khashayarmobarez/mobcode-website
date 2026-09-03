@@ -51,7 +51,7 @@ export default async function AdminProductsPage() {
                   {product.imagePath ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={`/api/products/${product.slug}/image`}
+                      src={`/api/products/${product.slug}/image?v=${product.updatedAt.getTime()}`}
                       alt={product.name}
                       className="size-14 rounded-xl object-cover"
                     />
