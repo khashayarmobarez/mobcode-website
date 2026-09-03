@@ -81,7 +81,7 @@ export function Products() {
         </div>
 
         <p className="mt-8 text-center font-mono text-xs text-muted">
-          پرداخت کارت به کارت · تحویل در تلگرام · ضمانت تعویض
+          پرداخت کارت به کارت · تحویل در تلگرام
         </p>
       </div>
     </section>

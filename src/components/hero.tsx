@@ -46,8 +46,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-6xl px-5 pb-24 pt-36 text-center sm:pt-40">
         <div className="animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 font-mono text-xs text-muted">
-            <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-            تحویل آنی · پرداخت کارت به کارت
+            <span className="size-1.5 animate-pulse rounded-full bg-accent" />تحویل ۲۴ ساعته
           </span>
         </div>
 
@@ -55,14 +54,14 @@ export function Hero() {
           className="animate-fade-up mx-auto mt-8 max-w-3xl font-display text-4xl font-bold leading-[1.15] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "80ms" }}
         >
-          اکانت هوش مصنوعی، <span className="text-accent">تحویل آنی.</span>
+          فروش اکانت کمپانی های معتبر  و سرویس های هوش مصنوعی <span className="text-accent"></span>
         </h1>
 
         <p
           className="animate-fade-up mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
           style={{ animationDelay: "160ms" }}
         >
-          خرید اکانت معتبر opencode و دیگر سرویس‌های هوش مصنوعی با ضمانت تعویض.
+          خرید اکانت معتبر opencode و دیگر سرویس‌های هوش مصنوعی .
           پرداخت ساده کارت به کارت و پشتیبانی ۲۴/۷ در تلگرام.
         </p>
 

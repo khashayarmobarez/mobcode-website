@@ -25,7 +25,7 @@ export default async function ShopPage() {
             <div className="animate-fade-up">
               <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 font-mono text-xs text-muted">
                 <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-                تحویل آنی · پرداخت کارت به کارت
+                تحویل ۲۴ ساعته · پرداخت کارت به کارت
               </span>
             </div>
             <h1
