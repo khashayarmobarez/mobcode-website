@@ -8,6 +8,8 @@ import { Faq } from "@/components/faq";
 import { CtaBanner } from "@/components/cta-banner";
 import { Footer } from "@/components/footer";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <>
