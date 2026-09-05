@@ -77,7 +77,7 @@ export function PaymentInfo() {
               className="group mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5"
             >
               <TelegramIcon className="size-4" />
-              ارسال رسید در تلگرام
+              خرید و ارسال رسید در تلگرام
             </a>
           </div>
         </Reveal>
