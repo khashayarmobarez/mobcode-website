@@ -118,7 +118,7 @@ copy button, all anchors).
   - `/api/products/[slug]/image` — streams the private cover blob (public
     route; product covers are public-facing).
   - `/buy` now redirects to `/shop`; header/footer/nav CTA point to `/shop`;
-    landing products section stays static, CTA → `/shop`.
+    landing products section shows the DB catalog in a carousel.
 - **Admin** (`/admin/products` + new/edit pages, tabs with سفارش‌ها):
   - CRUD products + variants (create/update/delete/sort), cover image upload
     to private Blob (`products/<id>/cover.<ext>`, deletes old on replace),

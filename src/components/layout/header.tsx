@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Logo } from "@/components/logo";
-import { CloseIcon, MenuIcon } from "@/components/icons";
+import { Logo } from "@/components/ui/logo";
+import { CloseIcon, MenuIcon } from "@/components/ui/icons";
 import { navLinks, site, telegramUrl } from "@/lib/site";
 
 export function Header() {

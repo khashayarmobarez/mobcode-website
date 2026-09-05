@@ -6,7 +6,7 @@ permission:
   bash: allow
 ---
 
-You are the debugger of the mobcode project. You find root causes and fix them.
+You are the debugger of the passkadeh project. You find root causes and fix them.
 
 # Context
 

@@ -7,7 +7,7 @@ Use PostgreSQL.
 Initial recommendation:
 
 - Provider: Neon
-- ORM: Drizzle
+- ORM: Prisma (the web app's ORM — do not introduce Drizzle)
 
 The database is the source of truth for application state.
 
@@ -16,17 +16,21 @@ The database is the source of truth for application state.
 At minimum, model:
 
 ```text
-users
-products
-product_plans
-inventory
-orders
-order_items
-payments
-payment_events
-fulfillments
-audit_logs
+users          (future)
+products       (implemented)
+product_plans  (implemented as "variants")
+inventory      (future)
+orders         (implemented)
+order_items    (future)
+payments       (future)
+payment_events (future)
+fulfillments   (future)
+audit_logs     (future)
 ```
+
+**Current implementation:** the schema in `prisma/schema.prisma` contains
+`Product`, `Variant`, and `Order`. Entities marked "(future)" above are target
+design, not yet built.
 
 ## Conceptual relationships
 
@@ -44,23 +48,14 @@ User
 
 ## Products
 
-Products should represent what MobCode sells.
+Products should represent what passkadeh sells.
 
 Do not encode provider-specific assumptions into the product table.
 
-Conceptual fields:
-
-```text
-id
-name
-slug
-description
-active
-created_at
-updated_at
-```
-
-Pricing may belong to a product plan/variant when multiple durations or packages exist.
+**Current model:** `Product` (name, slug, tagline, `features String[]`,
+badge?, featured, active, imagePath) with a `Variant` child (name, price,
+active, sortOrder). Pricing lives on the variant — this is the
+"product plan/variant" concept when multiple durations or packages exist.
 
 ## Inventory
 
@@ -83,7 +78,20 @@ If credentials must be stored, prefer encrypted storage or an external secret-ma
 
 An order represents customer intent to purchase.
 
-Example lifecycle:
+**Current state machine (in `prisma/schema.prisma`, shared with the web app):**
+
+```text
+PENDING
+PAID
+DELIVERED
+CANCELLED
+```
+
+The bot and web app must use exactly these states. If richer states are needed
+later (e.g. `fulfilling`, `refunded`, `failed`), that is a **shared schema
+migration** coordinated with the web app — never a bot-only divergence.
+
+Example target lifecycle (future):
 
 ```text
 pending
@@ -96,9 +104,12 @@ refunded
 failed
 ```
 
-The exact state machine must be documented in code and enforced consistently.
-
 ## Payments
+
+> **Future.** Today payments are **manual card-to-card**: the customer uploads a
+> receipt image (stored in Vercel Blob, private) and the owner verifies it
+> manually. There is no payment provider, no `payments` table, and no callback
+> verification yet.
 
 Payments are separate from orders.
 
@@ -190,3 +201,10 @@ Examples:
 - non-negative monetary values
 
 Do not rely only on application-level checks.
+
+> **Prisma 7 / Neon HTTP adapter constraint:** the web app's runtime client
+> uses `PrismaNeonHttp` (`@prisma/adapter-neon`), which does **not** support
+> `$transaction`. Write sequential queries and avoid nested `create` on
+> relations. If atomicity is required (e.g. future payment/fulfillment work),
+> use the WebSocket adapter (`PrismaNeon` + `ws`) or enforce invariants with
+> DB constraints and idempotency keys.

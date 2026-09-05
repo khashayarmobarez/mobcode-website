@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Unbounded, Vazirmatn, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { CursorGlow } from "@/components/cursor-glow";
+import { CursorGlow } from "@/components/layout/cursor-glow";
 import { site } from "@/lib/site";
 
 const unbounded = Unbounded({

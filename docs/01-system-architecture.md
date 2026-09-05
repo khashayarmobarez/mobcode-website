@@ -9,7 +9,7 @@
 - Runtime: serverless/request-driven by default
 - Database: PostgreSQL
 - Initial database provider: Neon
-- ORM: Drizzle
+- ORM: Prisma
 
 ### Optional infrastructure
 

@@ -48,7 +48,7 @@ External providers belong behind an integration boundary.
 Conceptually:
 
 ```text
-MobCode
+passkadeh
   |
   +--> Product catalog
   |

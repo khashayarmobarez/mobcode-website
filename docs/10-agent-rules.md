@@ -1,13 +1,13 @@
 # Agent Rules
 
-This file is the operational source of truth for coding agents working on MobCode.
+This file is the operational source of truth for coding agents working on passkadeh.
 
 ## Architecture rules
 
 1. Do not introduce a new service without explaining the concrete requirement.
 2. Prefer Next.js + Vercel for application functionality.
 3. Prefer PostgreSQL/Neon for persistent data.
-4. Prefer Drizzle for database access.
+4. Prefer Prisma for database access (the web app's ORM; no second ORM).
 5. Do not create a persistent worker unless the task genuinely requires one.
 6. Do not turn a simple scheduled operation into a permanent server.
 7. Do not introduce microservices for organizational aesthetics.
@@ -33,6 +33,9 @@ This file is the operational source of truth for coding agents working on MobCod
 4. Use explicit order/payment/fulfillment states.
 5. Do not delete financial history to represent refunds/cancellations.
 6. Preserve auditability.
+7. The Neon HTTP adapter (`PrismaNeonHttp`) does **not** support `$transaction`
+   — write sequential queries; use the WebSocket adapter or DB constraints +
+   idempotency keys when atomicity is required.
 
 ## Code organization
 
@@ -95,7 +98,7 @@ Jobs must be:
 
 ## UI rules
 
-Use the established MobCode design system:
+Use the established passkadeh design system:
 
 - navy `#0F172A`
 - primary blue `#2563EB`

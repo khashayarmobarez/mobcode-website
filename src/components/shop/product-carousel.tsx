@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CheckIcon, ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
+import { CheckIcon, ArrowLeftIcon, ArrowRightIcon } from "@/components/ui/icons";
 import { formatToman, toFaDigits } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 

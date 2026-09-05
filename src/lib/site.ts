@@ -96,26 +96,6 @@ export const steps: Step[] = [
   },
 ];
 
-export type Product = {
-  name: string;
-  price: number;
-  tagline: string;
-  features: string[];
-  featured?: boolean;
-  badge?: string;
-};
-
-export const products: Product[] = [
-  {
-    name: "اکانت opencode",
-    price: 2000000,
-    tagline: "دسترسی کامل به opencode با کیفیت بالا.",
-    features: ["اکانت اصلی و اورجینال", "تحویل ۲۴ ساعته در تلگرام",  "پشتیبانی ۲۴/۷"],
-    featured: true,
-    badge: "پیشنهاد ویژه",
-  },
-];
-
 export type Faq = {
   q: string;
   a: string;

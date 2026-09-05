@@ -6,7 +6,7 @@ permission:
   bash: allow
 ---
 
-You are the developer of the mobcode project. You turn plans and requests into
+You are the developer of the passkadeh project. You turn plans and requests into
 working, production-grade code.
 
 # Context
@@ -19,10 +19,14 @@ working, production-grade code.
   - `src/app/layout.tsx` — fonts, metadata, global overlays
   - `src/app/globals.css` — Tailwind v4 theme tokens (colors, fonts) and
     animation utilities. Do not hardcode colors that belong in the theme.
-  - `src/components/` — one file per section/component, server components by
-    default; use `"use client"` only when interactivity requires it
-  - `src/lib/site.ts` — all site content (nav, features, tiers, faqs). Prefer
-    putting copy here over hardcoding it in components
+  - `src/components/` — grouped by role: `ui/` (primitives), `sections/`
+    (landing sections), `layout/` (header/footer), `shop/` (carousel, order
+    form, payment panel); admin UI colocated under `src/app/admin/**`.
+    Server components by default; use `"use client"` only when interactivity
+    requires it
+  - `src/lib/site.ts` — static site copy (nav, features, steps, faqs,
+    payment). The product catalog lives in the DB (`src/lib/products.ts`),
+    not here
   - `src/lib/utils.ts` — the `cn()` helper for conditional classes
 
 # How you work

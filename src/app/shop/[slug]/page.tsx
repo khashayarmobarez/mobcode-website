@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { CheckIcon } from "@/components/icons";
-import { OrderForm } from "@/components/order-form";
-import { PaymentInfo } from "@/components/payment-info";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { CheckIcon } from "@/components/ui/icons";
+import { OrderForm } from "@/components/shop/order-form";
+import { PaymentInfo } from "@/components/shop/payment-info";
 import { productBySlug } from "@/lib/products";
 
 export const dynamic = "force-dynamic";

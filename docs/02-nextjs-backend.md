@@ -1,5 +1,9 @@
 # Next.js Backend Conventions
 
+> **Status:** mostly current. The app today uses **Route Handlers** for all
+> mutations and performs hand-written validation (no Zod, no Server Actions
+> yet). The rules below are the conventions to follow as the backend grows.
+
 ## General rule
 
 Next.js is the primary backend-for-frontend.

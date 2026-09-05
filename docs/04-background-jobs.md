@@ -1,5 +1,10 @@
 # Background Jobs and Workers
 
+> **Status:** future. The current app has no background jobs — order
+> processing is synchronous (blob upload → DB insert → Telegram notify inside
+> the request). This doc is guidance for when async work (payment callbacks,
+> fulfillment, provider automation) appears.
+
 ## Default decision
 
 Do NOT create a persistent bot/server by default.

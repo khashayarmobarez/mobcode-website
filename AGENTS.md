@@ -54,13 +54,17 @@ managed block above). Key v16 breaking changes to remember:
   `font-sans`, `font-mono`, `border-line`, plus animation utilities
   (`animate-fade-up`, `animate-blink`, `animate-marquee`) and the `.reveal`
   scroll-reveal class. Never hardcode hex values in components.
-- `src/components/` — one file per section. Server components by default; add
-  `"use client"` only for interactivity (state/effects).
-- `src/lib/site.ts` — single source of truth for site copy and config (site
-  info, telegram link, payment card, nav, features, steps, products, faqs).
-  Put copy here, not in components.
+- `src/lib/site.ts` — static site copy and config (site info, telegram link,
+  payment card, nav, features, steps, faqs). The product catalog lives in the
+  DB (see `src/lib/products.ts`), not here.
 - `src/lib/utils.ts` — `cn()` for conditional Tailwind classes, plus
   `toFaDigits()` and `formatToman()` for Persian numerals/prices.
+- `src/components/` — grouped by role: `ui/` (primitives: icons, logo,
+  reveal, section-heading), `sections/` (landing sections), `layout/`
+  (header/footer/cursor-glow), `shop/` (product-carousel, order-form,
+  payment-info). Server components by default; add `"use client"` only for
+  interactivity (state/effects). Admin UI is colocated under
+  `src/app/admin/**`.
 - `src/lib/prisma.ts` — Prisma 7 client singleton (Neon HTTP driver adapter).
   Generated client lives at `src/generated/prisma` (run `npx prisma
   generate`; never hand-edit).

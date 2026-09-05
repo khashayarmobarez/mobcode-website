@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/ui/logo";
 import { site, telegramUrl } from "@/lib/site";
 
 type FooterLink = {

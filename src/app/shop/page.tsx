@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { activeProducts, minVariantPrice } from "@/lib/products";
 import { formatToman, toFaDigits } from "@/lib/utils";
 

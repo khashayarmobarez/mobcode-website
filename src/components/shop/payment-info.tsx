@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
-import { CardIcon, CheckIcon, TelegramIcon } from "@/components/icons";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { CardIcon, CheckIcon, TelegramIcon } from "@/components/ui/icons";
 import { payment, telegramUrl } from "@/lib/site";
 import { toFaDigits } from "@/lib/utils";
 

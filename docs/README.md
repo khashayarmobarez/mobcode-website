@@ -1,23 +1,29 @@
-# MobCode Architecture
+# passkadeh Architecture
 
-This directory contains the architectural source of truth for the MobCode project.
+This directory contains the architectural source of truth for the passkadeh project.
 
 ## Purpose
 
-MobCode is a developer-focused digital products platform targeting customers in Iran. The initial product offering may include OpenCode-related subscriptions/access, but the architecture must not hard-code the business around a single supplier or account model.
+passkadeh is a developer-focused digital products store targeting customers in Iran. The initial product offering includes OpenCode and Cline accounts, but the architecture must not hard-code the business around a single supplier or account model.
 
 ## Core principles
 
 1. Keep the first production architecture simple.
 2. Use Next.js as the main application and backend-for-frontend.
 3. Deploy the Next.js application on Vercel.
-4. Use PostgreSQL as the primary database, preferably Neon initially.
-5. Use Drizzle ORM.
+4. Use PostgreSQL as the primary database, Neon currently.
+5. Use Prisma (the web app's ORM). Do not introduce a second ORM.
 6. Start without a persistent worker unless a real workload requires one.
 7. Use scheduled/serverless jobs for short, bounded background tasks.
 8. Add a small VPS worker only for persistent, long-running, queue-driven, or connection-heavy workloads.
 9. Model the business around products, orders, inventory, payments, and fulfillment—not around OpenCode accounts.
 10. Security, idempotency, auditability, and provider abstraction are production requirements.
+
+> **Status note:** this document describes the **target** architecture. The
+> current implementation is a subset: products with variants, card-to-card
+> orders with receipt upload, and an admin panel. Inventory, payment providers,
+> fulfillment, and background workers are **future** work — marked as such in
+> each file.
 
 ## Architecture at a glance
 

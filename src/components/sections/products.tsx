@@ -1,9 +1,9 @@
-import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 import {
   ProductCarousel,
   type CarouselProduct,
-} from "@/components/product-carousel";
+} from "@/components/shop/product-carousel";
 import { activeProducts, minVariantPrice } from "@/lib/products";
 
 export async function Products() {

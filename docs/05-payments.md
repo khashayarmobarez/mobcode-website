@@ -1,5 +1,12 @@
 # Payment and Order Architecture
 
+> **Status:** target/future. Today the store uses **manual card-to-card**
+> payments with receipt-image upload (`POST /api/orders` → private Vercel Blob
+> → Telegram notification to the owner) and manual verification. There is no
+> payment provider yet. The flow below is what to build when a provider is
+> added — the "never trust the browser" and price-integrity rules already apply
+> today (prices are read from the DB via variant lookup).
+
 ## Core principle
 
 Payment state comes from the payment provider/server-side verification, not from the browser.

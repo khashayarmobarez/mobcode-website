@@ -2,7 +2,7 @@
 
 ## Brand direction
 
-MobCode should feel:
+passkadeh should feel:
 
 - trustworthy
 - modern

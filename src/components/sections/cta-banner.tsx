@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeftIcon } from "@/components/icons";
+import { ArrowLeftIcon } from "@/components/ui/icons";
 
 export function CtaBanner() {
   return (

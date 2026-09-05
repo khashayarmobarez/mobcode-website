@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { SectionHeading } from "@/components/section-heading";
-import { ChevronDownIcon } from "@/components/icons";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { ChevronDownIcon } from "@/components/ui/icons";
 import { faqs } from "@/lib/site";
 import { cn } from "@/lib/utils";
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/ui/reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 import {
   CodeIcon,
   HeadsetIcon,
@@ -8,7 +8,7 @@ import {
   RocketIcon,
   ShieldIcon,
   StoreIcon,
-} from "@/components/icons";
+} from "@/components/ui/icons";
 import { features, type Feature } from "@/lib/site";
 import { toFaDigits } from "@/lib/utils";
 

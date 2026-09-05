@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from "@/components/icons";
+import { ArrowLeftIcon } from "@/components/ui/icons";
 
 function TerminalMock() {
   return (
