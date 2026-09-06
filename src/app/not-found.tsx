@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <main className="grid min-h-dvh place-items-center bg-background px-5 text-center">
       <div>
-        <p className="font-mono text-sm uppercase tracking-[0.3em] text-accent">
+        <p className="font-mono text-2xl uppercase tracking-[0.3em] text-accent">
           ۴۰۴
         </p>
         <h1 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
