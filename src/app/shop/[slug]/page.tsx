@@ -7,6 +7,7 @@ import { CheckIcon } from "@/components/ui/icons";
 import { OrderForm } from "@/components/shop/order-form";
 import { PaymentInfo } from "@/components/shop/payment-info";
 import { productBySlug } from "@/lib/products";
+import { getUsdToToman } from "@/lib/navasan";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,7 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = await productBySlug(slug);
   if (!product || !product.active) notFound();
+  const rate = await getUsdToToman();
 
   return (
     <>
@@ -97,7 +99,7 @@ export default async function ProductPage({
             variants={product.variants.map((v) => ({
               id: v.id,
               name: v.name,
-              price: v.price,
+              price: Math.round(v.price * rate),
             }))}
           />
         </div>

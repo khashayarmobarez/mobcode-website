@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { activeProducts, minVariantPrice } from "@/lib/products";
+import { getUsdToToman } from "@/lib/navasan";
 import { formatToman, toFaDigits } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const dynamic = "force-dynamic";
 
 export default async function ShopPage() {
   const products = await activeProducts();
+  const rate = await getUsdToToman();
 
   return (
     <>
@@ -52,6 +54,7 @@ export default async function ShopPage() {
             )}
             {products.map((product, i) => {
               const minPrice = minVariantPrice(product.variants);
+              const minToman = minPrice !== null ? Math.round(minPrice * rate) : null;
               return (
                 <Link
                   key={product.id}
@@ -84,9 +87,9 @@ export default async function ShopPage() {
                   <p className="mt-1 text-sm text-muted">{product.tagline}</p>
 
                   <p className="mt-6 font-display text-3xl font-bold">
-                    {minPrice !== null ? (
+                    {minToman !== null ? (
                       <>
-                        از {formatToman(minPrice)}
+                        از {formatToman(minToman)}
                       </>
                     ) : (
                       "بدون قیمت"

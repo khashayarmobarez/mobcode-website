@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { formatToman, toFaDigits } from "@/lib/utils";
+import { formatUsd, toFaDigits } from "@/lib/utils";
 import { AdminNav } from "../admin-nav";
 import { ProductRowActions } from "./product-row-actions";
 
@@ -76,7 +76,7 @@ export default async function AdminProductsPage() {
                     </h2>
                     <p className="mt-0.5 text-sm text-muted">
                       {product.variants.length} گزینه ·{" "}
-                      {minPrice !== null ? `از ${formatToman(minPrice)}` : "بدون قیمت"}
+                      {minPrice !== null ? `از ${formatUsd(minPrice)}` : "بدون قیمت"}
                     </p>
                   </div>
                 </div>

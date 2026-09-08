@@ -3,6 +3,7 @@ import { put } from "@vercel/blob";
 import { prisma } from "@/lib/prisma";
 import { sendOrderNotification } from "@/lib/telegram";
 import { isAdminRequest } from "@/lib/admin-auth";
+import { getUsdToToman } from "@/lib/navasan";
 
 const MAX_SIZE = 4 * 1024 * 1024;
 const ACCEPTED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -77,7 +78,7 @@ export async function POST(request: Request) {
     data: {
       productName: product.name,
       variantName: variant.name,
-      productPrice: variant.price,
+      productPrice: Math.round(variant.price * (await getUsdToToman())),
       telegram,
       note: cleanNote,
       receiptUrl,

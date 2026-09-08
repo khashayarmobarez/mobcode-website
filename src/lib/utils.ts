@@ -11,3 +11,7 @@ export function toFaDigits(value: string | number) {
 export function formatToman(value: number) {
   return `${toFaDigits(value.toLocaleString("en-US"))} تومان`;
 }
+
+export function formatUsd(value: number) {
+  return `${toFaDigits(value.toLocaleString("en-US"))} دلار`;
+}

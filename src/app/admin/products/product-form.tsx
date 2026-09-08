@@ -225,7 +225,7 @@ export function ProductForm({ productId, initial }: Props) {
 
       <div>
         <label className="mb-1.5 block text-sm font-semibold text-foreground">
-          گزینه‌ها (قیمت به تومان)
+          گزینه‌ها (قیمت به دلار)
         </label>
         <div className="space-y-2">
           {variants.map((v, i) => (
@@ -239,9 +239,9 @@ export function ProductForm({ productId, initial }: Props) {
               <input
                 value={v.price}
                 onChange={(e) => updateVariant(i, { price: e.target.value })}
-                placeholder="۲۰۰۰۰۰۰"
+                placeholder="۲۰"
                 dir="ltr"
-                inputMode="numeric"
+                inputMode="decimal"
                 className="w-36 rounded-xl border border-line bg-background px-4 py-2.5 font-mono text-sm text-foreground outline-none transition-colors focus:border-accent"
               />
               <button
