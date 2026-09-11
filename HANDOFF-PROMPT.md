@@ -58,7 +58,8 @@ store), Telegram Bot API for owner notifications, ESLint 9 flat config.
 
 `DATABASE_URL`, `ADMIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`,
 `TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN`, `BLOB_STORE_ID`.
-Admin password is currently `Khshyr1234!!` (local) — change if needed.
+Admin password is set via `ADMIN_PASSWORD` in `.env.local` — never hardcode
+secrets in this file.
 
 ## Key gotchas to respect
 
