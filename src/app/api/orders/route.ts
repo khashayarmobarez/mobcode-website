@@ -4,9 +4,13 @@ import { prisma } from "@/lib/prisma";
 import { sendOrderNotification } from "@/lib/telegram";
 import { isAdminRequest } from "@/lib/admin-auth";
 import { getUsdToToman } from "@/lib/navasan";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 
 const MAX_SIZE = 4 * 1024 * 1024;
 const ACCEPTED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+const ORDER_LIMIT = 10;
+const ORDER_WINDOW = 10 * 60 * 1000;
 
 export async function GET() {
   if (!(await isAdminRequest())) {
@@ -19,6 +23,14 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const limit = rateLimit(`order:${clientIp(request)}`, ORDER_LIMIT, ORDER_WINDOW);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: "too_many_orders" },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+    );
+  }
+
   let formData: FormData;
   try {
     formData = await request.formData();

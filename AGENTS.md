@@ -106,7 +106,7 @@ TypeScript checks). Start `npm run dev` to exercise behavior.
 ## Backend
 
 - Env vars live in `.env.local` (gitignored) and must be mirrored in Vercel:
-  `DATABASE_URL`, `ADMIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`,
+  `DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `TELEGRAM_BOT_TOKEN`,
   `TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN`.
 - Prisma 7: schema in `prisma/schema.prisma`, config in `prisma.config.ts`
   (loads `.env.local`, datasource URL). No `url` in schema — it moved to the
