@@ -4,26 +4,22 @@ import {
   ProductCarousel,
   type CarouselProduct,
 } from "@/components/shop/product-carousel";
-import { activeProducts, minVariantPrice } from "@/lib/products";
-import { getUsdToToman } from "@/lib/navasan";
+import { activeProducts } from "@/lib/products";
+import { minVariantToman } from "@/lib/pricing";
 
 export async function Products() {
   const products = await activeProducts();
-  const rate = await getUsdToToman();
 
-  const carousel: CarouselProduct[] = products.map((product) => {
-    const minPriceUsd = minVariantPrice(product.variants);
-    return {
-      id: product.id,
-      name: product.name,
-      slug: product.slug,
-      tagline: product.tagline,
-      badge: product.badge,
-      featured: product.featured,
-      minPrice: minPriceUsd !== null ? Math.round(minPriceUsd * rate) : null,
-      features: product.features,
-    };
-  });
+  const carousel: CarouselProduct[] = products.map((product) => ({
+    id: product.id,
+    name: product.name,
+    slug: product.slug,
+    tagline: product.tagline,
+    badge: product.badge,
+    featured: product.featured,
+    minPrice: minVariantToman(product.variants),
+    features: product.features,
+  }));
 
   return (
     <section id="products" className="relative border-t border-line py-24 sm:py-32">

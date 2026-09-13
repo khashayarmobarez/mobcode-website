@@ -3,7 +3,7 @@ import { put } from "@vercel/blob";
 import { prisma } from "@/lib/prisma";
 import { sendOrderNotification } from "@/lib/telegram";
 import { isAdminRequest } from "@/lib/admin-auth";
-import { getUsdToToman } from "@/lib/navasan";
+import { tomanPrice } from "@/lib/pricing";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { IMAGE_EXTENSION, sniffImageType, type ImageType } from "@/lib/image";
 
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
     data: {
       productName: product.name,
       variantName: variant.name,
-      productPrice: Math.round(variant.price * (await getUsdToToman())),
+      productPrice: tomanPrice(variant.price, variant.priceToman),
       telegram,
       note: cleanNote,
       receiptUrl,

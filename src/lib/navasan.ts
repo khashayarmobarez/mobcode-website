@@ -3,22 +3,23 @@ const REVALIDATE_SECONDS = 16 * 60 * 60;
 
 const ROUND_TO = 10_000;
 
-// Fallback used only when NAVASAN_API_KEY is missing or the fetch fails, so
-// the storefront never breaks. Replace by setting the real key in env.
-const FALLBACK_USD_TO_TOMAN = 227_000;
+// Fallback used when Navasan is unreachable and as a stand-in for variants
+// whose Toman price has not been computed yet. Keep in sync with the daily
+// cron; it is only a safety net, never the primary source.
+export const FALLBACK_USD_TO_TOMAN = 227_000;
 
 type NavasanLatest = {
   usd_usdt?: { value?: string; change?: number; timestamp?: number; date?: string };
 };
 
-export async function getUsdToToman(): Promise<number> {
+export async function getUsdToToman(fresh = false): Promise<number> {
   const apiKey = process.env.NAVASAN_API_KEY;
   if (!apiKey) return FALLBACK_USD_TO_TOMAN;
 
   try {
     const res = await fetch(`${API_URL}?api_key=${apiKey}`, {
-      cache: "force-cache",
-      next: { revalidate: REVALIDATE_SECONDS },
+      cache: fresh ? "no-store" : "force-cache",
+      ...(fresh ? {} : { next: { revalidate: REVALIDATE_SECONDS } }),
     });
     if (!res.ok) return FALLBACK_USD_TO_TOMAN;
 

@@ -56,8 +56,9 @@ store), Telegram Bot API for owner notifications, ESLint 9 flat config.
 
 ## Env (`.env.local`, also in Vercel)
 
-`DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `TELEGRAM_BOT_TOKEN`,
-`TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN`, `BLOB_STORE_ID`.
+`DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `NAVASAN_API_KEY`,
+`CRON_SECRET`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ADMIN_CHAT_ID`,
+`BLOB_READ_WRITE_TOKEN`, `BLOB_STORE_ID`.
 Admin password is set via `ADMIN_PASSWORD` and cookie signing via
 `ADMIN_SECRET` in `.env.local` — never hardcode secrets in this file.
 

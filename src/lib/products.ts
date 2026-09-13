@@ -15,7 +15,3 @@ export const productBySlug = cache((slug: string) =>
     include: { variants: { where: { active: true }, orderBy: { sortOrder: "asc" } } },
   }),
 );
-
-export function minVariantPrice(variants: { price: number }[]) {
-  return variants.length ? Math.min(...variants.map((v) => v.price)) : null;
-}

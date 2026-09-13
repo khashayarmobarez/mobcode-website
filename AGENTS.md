@@ -106,13 +106,23 @@ TypeScript checks). Start `npm run dev` to exercise behavior.
 ## Backend
 
 - Env vars live in `.env.local` (gitignored) and must be mirrored in Vercel:
-  `DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `TELEGRAM_BOT_TOKEN`,
-  `TELEGRAM_ADMIN_CHAT_ID`, `BLOB_READ_WRITE_TOKEN`.
+  `DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SECRET`, `NAVASAN_API_KEY`,
+  `CRON_SECRET`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ADMIN_CHAT_ID`,
+  `BLOB_READ_WRITE_TOKEN`.
 - Prisma 7: schema in `prisma/schema.prisma`, config in `prisma.config.ts`
   (loads `.env.local`, datasource URL). No `url` in schema — it moved to the
   config. Run `npm run db:migrate` after schema changes, `npm run
   db:studio` to inspect. Models: `Product` + `Variant` (catalog, edited in
   admin) and `Order` (snapshots names/price incl. `variantName`).
+- **Pricing**: `Variant.price` is the source of truth in **dollars** (edited in
+  admin). `Variant.priceToman` is a computed Toman snapshot for the storefront
+  **and the shared Telegram bot** (the bot reads `priceToman` directly — never
+  call Navasan from the bot). The **only** Navasan caller is the daily cron
+  `GET /api/cron/update-prices` (Vercel cron in `vercel.json`, guarded by
+  `CRON_SECRET`), which refreshes `priceToman = round(price × rate)` for all
+  variants. Display uses `tomanPrice(price, priceToman)` /
+  `minVariantToman(...)` from `src/lib/pricing.ts`, with a constant fallback
+  (`FALLBACK_USD_TO_TOMAN` in `src/lib/navasan.ts`) for not-yet-computed rows.
 - The Neon HTTP adapter (`PrismaNeonHttp`) does **not** support
   `$transaction` — write sequential queries, avoid nested `create` on
   relations.

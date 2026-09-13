@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { activeProducts, minVariantPrice } from "@/lib/products";
-import { getUsdToToman } from "@/lib/navasan";
+import { activeProducts } from "@/lib/products";
+import { minVariantToman } from "@/lib/pricing";
 import { formatToman, toFaDigits } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -14,7 +14,6 @@ export const dynamic = "force-dynamic";
 
 export default async function ShopPage() {
   const products = await activeProducts();
-  const rate = await getUsdToToman();
 
   return (
     <>
@@ -53,8 +52,7 @@ export default async function ShopPage() {
               </div>
             )}
             {products.map((product, i) => {
-              const minPrice = minVariantPrice(product.variants);
-              const minToman = minPrice !== null ? Math.round(minPrice * rate) : null;
+              const minToman = minVariantToman(product.variants);
               return (
                 <Link
                   key={product.id}
