@@ -15,15 +15,22 @@ type ReceiptFile = {
   type: string;
 };
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 export function orderCaption(order: OrderNotification) {
   const lines = [
     `🛒 سفارش جدید`,
     `—`,
-    `محصول: ${order.productName}`,
-    order.variantName ? `گزینه: ${order.variantName}` : null,
+    `محصول: ${escapeHtml(order.productName)}`,
+    order.variantName ? `گزینه: ${escapeHtml(order.variantName)}` : null,
     `قیمت: ${formatToman(order.productPrice)}`,
-    `تلگرام: @${order.telegram}`,
-    order.note ? `یادداشت: ${order.note}` : null,
+    `تلگرام: @${escapeHtml(order.telegram)}`,
+    order.note ? `یادداشت: ${escapeHtml(order.note)}` : null,
     `—`,
     `کد سفارش: #${toFaDigits(order.id.slice(-6))}`,
   ].filter(Boolean);

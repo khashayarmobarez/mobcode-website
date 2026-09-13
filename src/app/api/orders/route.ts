@@ -5,9 +5,10 @@ import { sendOrderNotification } from "@/lib/telegram";
 import { isAdminRequest } from "@/lib/admin-auth";
 import { getUsdToToman } from "@/lib/navasan";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { IMAGE_EXTENSION, sniffImageType, type ImageType } from "@/lib/image";
 
 const MAX_SIZE = 4 * 1024 * 1024;
-const ACCEPTED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const ACCEPTED_TYPES = new Set<ImageType>(["image/jpeg", "image/png", "image/webp"]);
 
 const ORDER_LIMIT = 10;
 const ORDER_WINDOW = 10 * 60 * 1000;
@@ -19,7 +20,9 @@ export async function GET() {
   const orders = await prisma.order.findMany({
     orderBy: { createdAt: "desc" },
   });
-  return NextResponse.json(orders);
+  return NextResponse.json(orders, {
+    headers: { "Cache-Control": "no-store" },
+  });
 }
 
 export async function POST(request: Request) {
@@ -73,17 +76,20 @@ export async function POST(request: Request) {
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "missing_receipt" }, { status: 400 });
   }
-  if (!ACCEPTED_TYPES.has(file.type)) {
-    return NextResponse.json({ error: "bad_file_type" }, { status: 400 });
-  }
   if (file.size > MAX_SIZE) {
     return NextResponse.json({ error: "file_too_large" }, { status: 400 });
   }
+  const imageType = await sniffImageType(file);
+  if (!imageType || !ACCEPTED_TYPES.has(imageType)) {
+    return NextResponse.json({ error: "bad_file_type" }, { status: 400 });
+  }
 
+  const ext = IMAGE_EXTENSION[imageType];
+  const filename = `receipt.${ext}`;
   const receiptUrl = await put(
-    `receipts/${Date.now()}-${file.name.replace(/[^\w.\-]/g, "")}`,
+    `receipts/${Date.now()}-${filename}`,
     file,
-    { access: "private", contentType: file.type },
+    { access: "private", contentType: imageType },
   ).then((blob) => blob.url);
 
   const order = await prisma.order.create({
@@ -106,7 +112,7 @@ export async function POST(request: Request) {
       telegram: order.telegram,
       note: order.note,
     },
-    { bytes: await file.arrayBuffer(), filename: file.name, type: file.type },
+    { bytes: await file.arrayBuffer(), filename, type: imageType },
   );
 
   return NextResponse.json({ id: order.id }, { status: 201 });

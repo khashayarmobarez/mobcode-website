@@ -216,7 +216,7 @@ export function ProductForm({ productId, initial }: Props) {
           </label>
           <input
             type="file"
-            accept="image/png,image/jpeg,image/webp"
+            accept="image/png,image/jpeg,image/jpg,image/webp,.jpg,.jpeg"
             onChange={onImageChange}
             className="w-full rounded-xl border border-line bg-background px-4 py-3 text-sm text-muted outline-none transition-colors file:mr-3 file:rounded-lg file:border-0 file:bg-accent/10 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-accent focus:border-accent"
           />

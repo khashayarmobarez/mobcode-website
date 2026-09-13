@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import { del, put } from "@vercel/blob";
 import { prisma } from "@/lib/prisma";
 import { isAdminRequest } from "@/lib/admin-auth";
+import { IMAGE_EXTENSION, sniffImageType, type ImageType } from "@/lib/image";
 
 const MAX_SIZE = 4 * 1024 * 1024;
-const ACCEPTED = new Set(["image/jpeg", "image/png", "image/webp"]);
+const ACCEPTED = new Set<ImageType>(["image/jpeg", "image/png", "image/webp"]);
 
 export async function POST(
   request: Request,
@@ -25,14 +26,15 @@ export async function POST(
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "missing_image" }, { status: 400 });
   }
-  if (!ACCEPTED.has(file.type)) {
-    return NextResponse.json({ error: "bad_file_type" }, { status: 400 });
-  }
   if (file.size > MAX_SIZE) {
     return NextResponse.json({ error: "file_too_large" }, { status: 400 });
   }
+  const imageType = await sniffImageType(file);
+  if (!imageType || !ACCEPTED.has(imageType)) {
+    return NextResponse.json({ error: "bad_file_type" }, { status: 400 });
+  }
 
-  const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+  const ext = IMAGE_EXTENSION[imageType];
   const path = `products/${id}/cover.${ext}`;
 
   if (product.imagePath) {
@@ -41,7 +43,7 @@ export async function POST(
 
   const blob = await put(path, file, {
     access: "private",
-    contentType: file.type,
+    contentType: imageType,
   });
 
   await prisma.product.update({ where: { id }, data: { imagePath: blob.pathname } });

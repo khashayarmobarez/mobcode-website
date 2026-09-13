@@ -26,6 +26,8 @@ export async function GET(
     status: 200,
     headers: {
       "Content-Type": result.blob.contentType ?? "application/octet-stream",
+      "X-Content-Type-Options": "nosniff",
+      "Content-Disposition": "inline",
       "Cache-Control": "private, no-store",
     },
   });
