@@ -30,17 +30,24 @@ function CopyButton({ value }: { value: string }) {
   );
 }
 
-export function PaymentInfo() {
-  const groups = payment.cardNumber.match(/.{1,4}/g) ?? [payment.cardNumber];
+function maskCardNumber(cardNumber: string) {
+  const groups = cardNumber.match(/.{1,4}/g) ?? [cardNumber];
+  return groups
+    .map((group, i) =>
+      i === groups.length - 1 ? group : "•".repeat(group.length),
+    )
+    .join("-");
+}
 
+export function PaymentInfo() {
   return (
     <section id="payment" className="relative border-t border-line py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5">
         <Reveal>
           <SectionHeading
             kicker="پرداخت"
-            title="کارت به کارت، بدون درگاه."
-            sub="مبلغ سفارش را به شماره کارت زیر واریز کنید و تصویر رسید را در تلگرام بفرستید."
+            title="ثبت سفارش از طریق تلگرام"
+            sub="مبلغ سفارش را به شماره کارت زیر واریز کنید و تص  ویر رسید را در تلگرام بفرستید."
           />
         </Reveal>
 
@@ -55,7 +62,7 @@ export function PaymentInfo() {
             </p>
 
             <p dir="ltr" className="mt-4 font-mono text-2xl font-bold tracking-wider sm:text-3xl">
-              {groups.join("-")}
+              {maskCardNumber(payment.cardNumber)}
             </p>
 
             {payment.holderName && (
